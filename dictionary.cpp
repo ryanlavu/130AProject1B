@@ -8,12 +8,27 @@ Dictionary(String fname, String paramFileName) {
 	int tableSize;
 	int words;
 	unsigned long rand_a, rand_b, rand_c;
+
+	
+	//To read the file containing p and c values
+	string getA, getB, getC, getTableSize;
+	getline(firstFileObj,getTableSize);
+	tableSize = stoi(getTableSize);
+	ifstream firstFileObj(argv[1]);
+	getline(firstFileObj,getA);
+	rand_a = stoi(getA);
+	getline(firstFileObj,getB);
+	rand_b = stoi(getB);
+	getline(firstFileObj,getC);
+	rand_c = stoi(getC);
+	
+	firstFileObj.close();
+
 	mainHash = new Hash24(rand_a, rand_b, rand_c);
 
 	int sizeArray[tableSize] = {0};
 	Hash24 hashArray[tableSize];
 
-	
 	// Hash24 function to dump data
 	mainHash.dump();
 
