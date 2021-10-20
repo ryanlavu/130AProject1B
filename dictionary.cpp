@@ -1,13 +1,17 @@
 using namespace std;
 
+String hashTable[][];
+Hash24 mainHash;
+
 Dictionary(String fname, String paramFileName) {
 
 	int tableSize;
 	int words;
 	unsigned long rand_a, rand_b, rand_c;
-	Hash24 mainHash = new Hash24(rand_a, rand_b, rand_c);
+	mainHash = new Hash24(rand_a, rand_b, rand_c);
 
 	int sizeArray[tableSize] = {0};
+	Hash24 hashArray[tableSize];
 
 	
 	// Hash24 function to dump data
@@ -41,6 +45,9 @@ Dictionary(String fname, String paramFileName) {
 	
 	cout << "** Words in the slot with most collisions ***" << endl;
 	// For loop to print all words in the slot with most collisions
+	for(int i = 0; i < maxCol; i++) {
+		cout << hashTable[maxColIndex][i] << endl;
+	}
 	
 	// For loop for # of secondary hash tables trying hash functions
 	cout << "Average # of hash functions tried = " << avgTries << endl;
@@ -51,5 +58,7 @@ Dictionary(String fname, String paramFileName) {
 }
 
 bool find(String word) {
+
 	return false;
+
 }
