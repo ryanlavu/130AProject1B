@@ -11,7 +11,7 @@ Dictionary(String fname, String paramFileName) {
 
 	
 	//To read the file containing p and c values
-	ifstream paramFile(argv[1]);
+	ifstream paramFile(paramFileName);
 	string getA, getB, getC, getTableSize;
 	getline(paramFile,getTableSize);
 	tableSize = stoi(getTableSize);
