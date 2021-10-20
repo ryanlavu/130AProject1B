@@ -11,18 +11,18 @@ Dictionary(String fname, String paramFileName) {
 
 	
 	//To read the file containing p and c values
+	ifstream paramFile(argv[1]);
 	string getA, getB, getC, getTableSize;
-	getline(firstFileObj,getTableSize);
+	getline(paramFile,getTableSize);
 	tableSize = stoi(getTableSize);
-	ifstream firstFileObj(argv[1]);
-	getline(firstFileObj,getA);
+	getline(paramFile,getA);
 	rand_a = stoi(getA);
-	getline(firstFileObj,getB);
+	getline(paramFile,getB);
 	rand_b = stoi(getB);
-	getline(firstFileObj,getC);
+	getline(paramFile,getC);
 	rand_c = stoi(getC);
 	
-	firstFileObj.close();
+	paramFile.close();
 
 	mainHash = new Hash24(rand_a, rand_b, rand_c);
 
