@@ -12,16 +12,16 @@ private:
    static long const prime2 = 17027399L ;   // larger prime ~ 2^24 = 16777216
 
    // random values for the hash function
-   long random_a ;
-   long random_b ;
-   long random_c ;
+   unsigned long random_a ;
+   unsigned long random_b ;
+   unsigned long random_c ;
 
 public:
     Hash24();
-    int hash(long x);
+    Hash24(unsigned long rand_a, unsigned long rand_b, unsigned long rand_c);
+    int hash(unsigned long x);
     int hash(std::string str);
     void dump();
 };
 
 #endif
-

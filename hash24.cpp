@@ -1,4 +1,3 @@
-
 #include "hash24.h"
 
 #include <iostream>
@@ -18,7 +17,19 @@ Hash24::Hash24() {
     random_c = rand() % (int)(prime1-1) + 1 ;   // 1 <= random_c < prime1
 }
 
-int Hash24::hash(long x) {
+Hash24::Hash24(unsigned long rand_a, unsigned long rand_b, unsigned long rand_c) {
+
+    if ( !initialized ) {
+        srand(time(0));
+        initialized = true ;
+    }
+    // store random value params
+    random_a = rand_a;
+    random_b = rand_b;
+    random_c = rand_c;
+}
+
+int Hash24::hash(unsigned long x) {
     if (x >= prime2) throw std::runtime_error( "Input is greater than prime number!!" ); ;
     return (int) ( ( random_a * x + random_b ) % prime2 ) ;
 }
@@ -28,6 +39,7 @@ int Hash24::hash(std::string str) {
     for (int i = 0 ; i < str.length() ; i++) {
         result = ( random_c * result + str.at(i) ) % prime1 ;
     }
+    //std::cout << result<<std::endl;
     return hash(result) ;  // call long to int hash() 
 }
 
