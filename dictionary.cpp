@@ -6,6 +6,7 @@ using namespace std;
 
 String hashTable[][];
 Hash24 mainHash;
+Hash24 hashArray[];
 
 Dictionary(String fname, String paramFileName) {
 
@@ -30,8 +31,9 @@ Dictionary(String fname, String paramFileName) {
 
 	mainHash = new Hash24(rand_a, rand_b, rand_c);
 
+	hashTable = new String[tableSize][];
 	int sizeArray[tableSize] = {0};
-	Hash24 hashArray[tableSize];
+	hashArray = new Hash24[tableSize];
 	Hash24 mainHash(rand_a, rand_b, rand_c);
 
 	// Hash24 function to dump data
@@ -48,6 +50,7 @@ Dictionary(String fname, String paramFileName) {
 	for(int i = 0; i < tableSize; i++){
 		wordVector.push_back(vector<string>());
 	}
+
 	//This is to read in the wordbase file and hash the words into a intArray and wordVector
 	while(wordBase)
 	{
@@ -181,6 +184,23 @@ Dictionary(String fname, String paramFileName) {
 }
 
 bool find(String word) {
+
+	int hashValue = mainHash.hash(word);
+
+	if(hashTable[hashValue]) {
+
+		int hash2Value = hashArray[hashValue].hash(word);
+		
+		if(hashTable[hashValue][hash2Value] == word) {
+		
+			cout << word << " found at " << hashValue << endl;
+			return true;
+
+		}
+	}
+
+	//Print not found if not found
+	cout << word << " not found" << endl;
 
 	return false;
 
