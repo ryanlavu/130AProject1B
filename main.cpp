@@ -8,20 +8,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 
-	//To read the file containing p and c values
-	string getA, getB, getC, getTableSize;
-	getline(firstFileObj,getTableSize);
-	int tableSize = stoi(getTableSize);
-	ifstream firstFileObj(argv[1]);
-	getline(firstFileObj,getA);
-	int a = stoi(getA);
-	getline(firstFileObj,getB);
-	int b = stoi(getB);
-	getline(firstFileObj,getC);
-	int c = stoi(getC);
-	
 
-	firstFileObj.close();
 
 
 
