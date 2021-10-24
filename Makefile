@@ -1,9 +1,6 @@
-EXE	= project1b
 
-all: project1b
-
-project1b: <list of .cpp files required for project1b>
-	g++ -std=c++11 $^ -o $@
+project1b: dictionary.o hash24.o main.o
+	gcc -o project1b dictionary.o hash24.o main.o -lstdc++ -lm -ldl
 
 clean:
-	rm -rf ${EXE}
+	$(RM) project1b dictionary.o hash24.o main.o

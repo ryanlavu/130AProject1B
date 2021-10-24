@@ -1,7 +1,10 @@
+#ifndef DICT_CPP
+#define DICT_CPP
+
 #include <fstream>
 #include <vector>
 #include <cmath>
-#include "hash24.cpp"
+#include "hash24.h"
 
 using namespace std;
 
@@ -276,3 +279,7 @@ bool find(String word) {
 	return false;
 
 }
+
+#endif
+
+
