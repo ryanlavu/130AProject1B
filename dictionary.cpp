@@ -115,6 +115,7 @@ Dictionary(String fname, String paramFileName) {
 			
 			hashTable[i] = new string[intArray[i] * intArray[i]];
 			hashArray[i] = new Hash24();
+			//hashArray[i] = new Hash24(rand_a,rand_b,rand_c); shouldn't it be this?
 			hashAttemptArray[i]++;
 
 		}
