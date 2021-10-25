@@ -270,8 +270,9 @@ class Dictionary {
 	bool find(string word) {
 
 		int hashValue = mainHash.hash(word);
-
-		if(hashTable[hashValue]) {
+		Hash24 secondArrayHash = hashArray[hashValue];
+		
+		if(hashTable[hashValue] ) {
 
 			int hash2Value = hashArray[hashValue].hash(word);
 
