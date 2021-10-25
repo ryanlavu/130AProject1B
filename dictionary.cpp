@@ -88,8 +88,8 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 
 		// To remove duplicates from wordVector
 		for(int i = 0; i < wordVector.size(); i++) {
-
-			for(int j = 0; j < wordVector[i].size() - 1; j++) {
+			
+			for(int j = 0; j < wordVector[i].size(); j++) {
 
 				word = wordVector[i][j];
 
@@ -114,7 +114,7 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 			}
 
 		}
-
+		
 		// Initializes the string arrays within the hashtable to the right size and if it is zero it is null
 		for(int i = 0; i < tableSize; i++) {
 
@@ -131,7 +131,7 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 		}
 
 		bool completedSecondHash = false;
-
+		
 		// Inputs all the strings from wordVector into the hashtable
 		for(int i = 0; i < wordVector.size(); i++) {
 
