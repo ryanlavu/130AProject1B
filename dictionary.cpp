@@ -272,7 +272,7 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 		Hash24 * secondArrayHash = hashArray[hashValue];
 		
 		if(hashTable[hashValue] ) {
-
+			
 			int hash2Value = hashArray[hashValue]->hash(word) % hashTable[hashValue]->size();
 
 			if(hashTable[hashValue][hash2Value] == word) {
