@@ -1,26 +1,22 @@
 #ifndef DICT_CPP
 #define DICT_CPP
 
-#include <fstream>
-#include <vector>
-#include <cmath>
-#include "hash24.h"
-#include <iostream>
+#include "dictionary.h"
 
 using namespace std;
 
+/*
 string ** hashTable;
 Hash24 * mainHash;
 Hash24 ** hashArray;
 
 class Dictionary {
 
-	public:
+	public:*/
 
-	Dictionary(string fname, string paramFileName) {
+Dictionary::Dictionary(string fname, string paramFileName) {
 
 		// General variables for main hash table
-		int tableSize;
 		int words;
 		unsigned long rand_a, rand_b, rand_c;
 
@@ -29,16 +25,16 @@ class Dictionary {
 		string getA, getB, getC, getTableSize;
 
 		getline(paramFile,getTableSize);
-		tableSize = stoi(getTableSize);
+		tableSize = stoul(getTableSize);
 
 		getline(paramFile,getA);
-		rand_a = stoi(getA);
+		rand_a = stoul(getA);
 
 		getline(paramFile,getB);
-		rand_b = stoi(getB);
+		rand_b = stoul(getB);
 
 		getline(paramFile,getC);
-		rand_c = stoi(getC);
+		rand_c = stoul(getC);
 
 		paramFile.close();
 
@@ -79,7 +75,7 @@ class Dictionary {
 			getline(wordBase, word);
 			if(word.empty()) break;
 			totalWords++;
-			index = mainHash->hash(word);
+			index = (mainHash->hash(word) % tableSize);
 			wordVector[index].push_back(word);
 			intArray[index]++;
 
@@ -145,8 +141,10 @@ class Dictionary {
 
 				for(int j = 0; j < intArray[i]; j++) {
 
+					int tempIndex = hashArray[i]->hash(wordVector[i][j]) % wordVector[i].size();
+
 					// If there is a collision within the secondary table
-					if(hashTable[i][hashArray[i]->hash(wordVector[i][j])] != "") {
+					if(hashTable[i][tempIndex] != "") {
 
 						// Randomize the secondary hash's a,b,c values
 						hashArray[i] = new Hash24();
@@ -155,7 +153,7 @@ class Dictionary {
 						//clears out the secondary table of values
 						for(int g = 0; g < intArray[i] * intArray[i]; g++) {
 
-							hashTable[i][g] = nullptr;
+							hashTable[i][g] = "";
 
 						}
 
@@ -164,7 +162,7 @@ class Dictionary {
 
 					} else {
 
-						hashTable[i][hashArray[i]->hash(wordVector[i][j])] = wordVector[i][j];
+						hashTable[i][tempIndex] = wordVector[i][j];
 
 					}
 
@@ -198,7 +196,7 @@ class Dictionary {
 
 		}
 
-		cout << "Max collisions" << maxCol << endl;
+		cout << "Max collisions = " << maxCol << endl;
 
 		// For loop for # of primary slots with number of words
 		int numArray[21] = {0};
@@ -266,14 +264,14 @@ class Dictionary {
 
 	}
 
-	bool find(string word) {
+	bool Dictionary::find(string word) {
 
-		int hashValue = mainHash->hash(word);
+		int hashValue = mainHash->hash(word) % tableSize;
 		Hash24 * secondArrayHash = hashArray[hashValue];
 		
 		if(hashTable[hashValue] ) {
 
-			int hash2Value = hashArray[hashValue]->hash(word);
+			int hash2Value = hashArray[hashValue]->hash(word) % hashTable[hashValue]->size();
 
 			if(hashTable[hashValue][hash2Value] == word) {
 
@@ -290,6 +288,6 @@ class Dictionary {
 
 	}
 
-};	
+//};	
 
 #endif
