@@ -178,7 +178,7 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 		}
 
 		// Basic information about hash table
-		cout << "Number of words = " << words << endl;
+		cout << "Number of words = " << uniqueWords << endl;
 		cout << "Table size = " << tableSize << endl;
 
 		// Function to find max collisions and index of bucket
@@ -196,6 +196,8 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 
 		}
 
+
+		if(maxCol == 1) maxCol = 0;
 		cout << "Max collisions = " << maxCol << endl;
 
 		// For loop for # of primary slots with number of words
