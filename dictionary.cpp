@@ -9,9 +9,9 @@
 
 using namespace std;
 
-int * hashTable;
+string * hashTable;
 Hash24 mainHash;
-int * hashArray;
+Hash24 * hashArray;
 
 class Dictionary {
 
@@ -41,10 +41,10 @@ class Dictionary {
 		paramFile.close();
 
 		// Initialize the main hash function using data from file
-		mainHash = new Hash24(rand_a, rand_b, rand_c);
+		mainHash = Hash24(rand_a, rand_b, rand_c);
 
 		// Initialize necessary arrays for the main hash table
-		hashTable = new String[tableSize][];	// Main hash table
+		hashTable = new string[tableSize][];	// Main hash table
 		int hashAttemptArray[tableSize] = {0}; 	// Store attempt of secondary arrays here
 		int sizeArray[tableSize] = {0}; 	// Store number of collisions in main hash here
 		hashArray = new Hash24[tableSize];	// Store Hash24 objects here
