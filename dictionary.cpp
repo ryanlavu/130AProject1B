@@ -9,14 +9,13 @@
 
 using namespace std;
 
-string * hashTable;
-Hash24 mainHash;
-
-//int * hashTable;
-//Hash24 mainHash;
-Hash24 * hashArray;
+string ** hashTable;
+Hash24 * mainHash;
+Hash24 ** hashArray;
 
 class Dictionary {
+
+	public:
 
 	Dictionary(string fname, string paramFileName) {
 
@@ -43,31 +42,20 @@ class Dictionary {
 
 		paramFile.close();
 
-		// Initialize the main hash function using data from file
-
-		mainHash = Hash24(rand_a, rand_b, rand_c);
-
-		// Initialize necessary arrays for the main hash table
-		hashTable = new string[tableSize][];	// Main hash table
-		int hashAttemptArray[tableSize] = {0}; 	// Store attempt of secondary arrays here
-
-		Hash24 mainHash(rand_a, rand_b, rand_c); 
-		//mainHash = new Hash24(rand_a, rand_b, rand_c);
+		// Initialize the main hash function using data from file 
+		mainHash = new Hash24(rand_a, rand_b, rand_c);
 
 		// Initialize necessary arrays for the main hash table
 
-		//string hashTable[][] = new string[tableSize][];
-		
 		// Main hash table
-		string **hashTable = new string *[tableSize];
-		//int hashAttemptArray[tableSize] = {0}; 	// Store attempt of secondary arrays here
+		hashTable = new string * [tableSize];
 		vector<int> hashAttemptArray(tableSize, 0);
 
 		int sizeArray[tableSize] = {0}; 	// Store number of collisions in main hash here
-		hashArray = new Hash24[tableSize];	// Store Hash24 objects here
+		hashArray = new Hash24 * [tableSize];	// Store Hash24 objects here
 
 		// Hash24 function to dump data of main hash object
-		mainHash.dump();
+		mainHash->dump();
 
 		// Variables for loading words from file and necessary data
 		ifstream wordBase(fname);
@@ -91,7 +79,7 @@ class Dictionary {
 			getline(wordBase, word);
 			if(word.empty()) break;
 			totalWords++;
-			index = mainHash.hash(word);
+			index = mainHash->hash(word);
 			wordVector[index].push_back(word);
 			intArray[index]++;
 
@@ -115,7 +103,7 @@ class Dictionary {
 
 						if(wordVector[i][j] == wordVector[i][k]) {
 
-							wordVector[i].erase(k);
+							wordVector[i].erase(wordVector[i].begin() + k);
 							intArray[i]--;
 							j--;
 							k--;
@@ -138,7 +126,7 @@ class Dictionary {
 				//Hash24 replaceHash;
 				hashTable[i] = new string[intArray[i] * intArray[i]];
 				//hashArray[i] = replaceHash;
-				hashArray[i] = new Hash24*();
+				hashArray[i] = new Hash24();
 				//hashArray[i] = new Hash24(rand_a,rand_b,rand_c); shouldn't it be this?
 				hashAttemptArray[i]++;
 
@@ -158,7 +146,7 @@ class Dictionary {
 				for(int j = 0; j < intArray[i]; j++) {
 
 					// If there is a collision within the secondary table
-					if(hashTable[i][hashArray[i].hash(wordVector[i][j])] != null) {
+					if(hashTable[i][hashArray[i]->hash(wordVector[i][j])] != "") {
 
 						// Randomize the secondary hash's a,b,c values
 						hashArray[i] = new Hash24();
@@ -167,7 +155,7 @@ class Dictionary {
 						//clears out the secondary table of values
 						for(int g = 0; g < intArray[i] * intArray[i]; g++) {
 
-							hashTable[i][g] = null;
+							hashTable[i][g] = nullptr;
 
 						}
 
@@ -176,7 +164,7 @@ class Dictionary {
 
 					} else {
 
-						hashTable[i][hashArray[i].hash(wordVector[i][j])] = wordVector[i][j];
+						hashTable[i][hashArray[i]->hash(wordVector[i][j])] = wordVector[i][j];
 
 					}
 
@@ -259,7 +247,7 @@ class Dictionary {
 
 		for(int i = 0; i < numSecondAttempt.size(); i++) {
 
-			cout << "# of secondary hash tables trying " << (i + 1) >> " hash functions = " << numSecondAttempt[i] << endl;
+			cout << "# of secondary hash tables trying " << (i + 1) << " hash functions = " << numSecondAttempt[i] << endl;
 
 		}
 
@@ -280,12 +268,12 @@ class Dictionary {
 
 	bool find(string word) {
 
-		int hashValue = mainHash.hash(word);
-		Hash24 secondArrayHash = hashArray[hashValue];
+		int hashValue = mainHash->hash(word);
+		Hash24 * secondArrayHash = hashArray[hashValue];
 		
 		if(hashTable[hashValue] ) {
 
-			int hash2Value = hashArray[hashValue].hash(word);
+			int hash2Value = hashArray[hashValue]->hash(word);
 
 			if(hashTable[hashValue][hash2Value] == word) {
 
