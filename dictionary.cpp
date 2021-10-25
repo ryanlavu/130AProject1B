@@ -215,7 +215,7 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 
 		for(int i = 0; i < 21; i++) {
 
-			cout << "# of primary slots with " << i << "words = " << numArray[i] << endl;
+			cout << "# of primary slots with " << i << " words = " << numArray[i] << endl;
 
 		}
 
