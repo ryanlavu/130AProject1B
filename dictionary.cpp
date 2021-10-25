@@ -50,7 +50,8 @@ class Dictionary {
 		
 		//// Main hash table
 		string **hashTable = new string *[tableSize];
-		int hashAttemptArray[tableSize] = {0}; 	// Store attempt of secondary arrays here
+		//int hashAttemptArray[tableSize] = {0}; 	// Store attempt of secondary arrays here
+		vector<int> hashAttemptArray(tableSize, 0);
 		int sizeArray[tableSize] = {0}; 	// Store number of collisions in main hash here
 		hashArray = new Hash24[tableSize];	// Store Hash24 objects here
 
@@ -232,12 +233,12 @@ class Dictionary {
 		// For loop for # of secondary hash tables trying hash functions
 		cout << "Number of hash functions tried:" << endl;
 
-		int numSecondAttempt[20] = {0};
+		vector<int> numSecondAttempt(20,0);
 
 		// Counts number of secondary attempts
 		for(int i = 0; i < hashAttemptArray.size(); i++) {
 
-			if(hashAttemptArray > 0 && hashAttemptArray < 21) {
+			if(hashAttemptArray[i] > 0 && hashAttemptArray[i] < 21) {
 
 				numSecondAttempt[hashAttemptArray[i] - 1]++;
 
