@@ -11,6 +11,9 @@ using namespace std;
 
 string * hashTable;
 Hash24 mainHash;
+
+//int * hashTable;
+//Hash24 mainHash;
 Hash24 * hashArray;
 
 class Dictionary {
@@ -41,11 +44,25 @@ class Dictionary {
 		paramFile.close();
 
 		// Initialize the main hash function using data from file
+
 		mainHash = Hash24(rand_a, rand_b, rand_c);
 
 		// Initialize necessary arrays for the main hash table
 		hashTable = new string[tableSize][];	// Main hash table
 		int hashAttemptArray[tableSize] = {0}; 	// Store attempt of secondary arrays here
+
+		Hash24 mainHash(rand_a, rand_b, rand_c); 
+		//mainHash = new Hash24(rand_a, rand_b, rand_c);
+
+		// Initialize necessary arrays for the main hash table
+
+		//string hashTable[][] = new string[tableSize][];
+		
+		// Main hash table
+		string **hashTable = new string *[tableSize];
+		//int hashAttemptArray[tableSize] = {0}; 	// Store attempt of secondary arrays here
+		vector<int> hashAttemptArray(tableSize, 0);
+
 		int sizeArray[tableSize] = {0}; 	// Store number of collisions in main hash here
 		hashArray = new Hash24[tableSize];	// Store Hash24 objects here
 
@@ -118,9 +135,10 @@ class Dictionary {
 		for(int i = 0; i < tableSize; i++) {
 
 			if(intArray[i] > 0) {
-
+				//Hash24 replaceHash;
 				hashTable[i] = new string[intArray[i] * intArray[i]];
-				hashArray[i] = new Hash24();
+				//hashArray[i] = replaceHash;
+				hashArray[i] = new Hash24*();
 				//hashArray[i] = new Hash24(rand_a,rand_b,rand_c); shouldn't it be this?
 				hashAttemptArray[i]++;
 
@@ -134,6 +152,8 @@ class Dictionary {
 		for(int i = 0; i < wordVector.size(); i++) {
 
 			while(!completedSecondHash) {
+
+				tryAgain:
 
 				for(int j = 0; j < intArray[i]; j++) {
 
@@ -164,8 +184,6 @@ class Dictionary {
 
 				// Complete for loop without colliding
 				completedSecondHash = true;
-
-				label tryAgain:
 
 			}
 
@@ -226,12 +244,12 @@ class Dictionary {
 		// For loop for # of secondary hash tables trying hash functions
 		cout << "Number of hash functions tried:" << endl;
 
-		int numSecondAttempt[20] = {0};
+		vector<int> numSecondAttempt(20,0);
 
 		// Counts number of secondary attempts
 		for(int i = 0; i < hashAttemptArray.size(); i++) {
 
-			if(hashAttemptArray > 0 && hashAttemptArray < 21) {
+			if(hashAttemptArray[i] > 0 && hashAttemptArray[i] < 21) {
 
 				numSecondAttempt[hashAttemptArray[i] - 1]++;
 
@@ -263,8 +281,9 @@ class Dictionary {
 	bool find(string word) {
 
 		int hashValue = mainHash.hash(word);
-
-		if(hashTable[hashValue]) {
+		Hash24 secondArrayHash = hashArray[hashValue];
+		
+		if(hashTable[hashValue] ) {
 
 			int hash2Value = hashArray[hashValue].hash(word);
 
