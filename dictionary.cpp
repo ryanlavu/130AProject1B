@@ -8,11 +8,11 @@
 
 using namespace std;
 
-String hashTable[][];
+int * hashTable;
 Hash24 mainHash;
-Hash24 hashArray[];
+int * hashArray;
 
-Dictionary(String fname, String paramFileName) {
+Dictionary(string fname, string paramFileName) {
 
 	// General variables for main hash table
 	int tableSize;
@@ -257,7 +257,7 @@ Dictionary(String fname, String paramFileName) {
 	
 }
 
-bool find(String word) {
+bool find(string word) {
 
 	int hashValue = mainHash.hash(word);
 
@@ -281,5 +281,3 @@ bool find(String word) {
 }
 
 #endif
-
-
