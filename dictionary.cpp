@@ -9,9 +9,9 @@
 
 using namespace std;
 
-int * hashTable;
-Hash24 mainHash;
-int * hashArray;
+//int * hashTable;
+//Hash24 mainHash;
+Hash24 * hashArray;
 
 class Dictionary {
 
@@ -41,10 +41,15 @@ class Dictionary {
 		paramFile.close();
 
 		// Initialize the main hash function using data from file
-		mainHash = new Hash24(rand_a, rand_b, rand_c);
+		Hash24 mainHash(rand_a, rand_b, rand_c); 
+		//mainHash = new Hash24(rand_a, rand_b, rand_c);
 
 		// Initialize necessary arrays for the main hash table
-		hashTable = new String[tableSize][];	// Main hash table
+
+		//string hashTable[][] = new string[tableSize][];
+		
+		//// Main hash table
+		string **hashTable = new string *[tableSize];
 		int hashAttemptArray[tableSize] = {0}; 	// Store attempt of secondary arrays here
 		int sizeArray[tableSize] = {0}; 	// Store number of collisions in main hash here
 		hashArray = new Hash24[tableSize];	// Store Hash24 objects here
@@ -118,9 +123,10 @@ class Dictionary {
 		for(int i = 0; i < tableSize; i++) {
 
 			if(intArray[i] > 0) {
-
+				//Hash24 replaceHash;
 				hashTable[i] = new string[intArray[i] * intArray[i]];
-				hashArray[i] = new Hash24();
+				//hashArray[i] = replaceHash;
+				hashArray[i] = new Hash24*();
 				//hashArray[i] = new Hash24(rand_a,rand_b,rand_c); shouldn't it be this?
 				hashAttemptArray[i]++;
 
@@ -134,6 +140,8 @@ class Dictionary {
 		for(int i = 0; i < wordVector.size(); i++) {
 
 			while(!completedSecondHash) {
+
+				tryAgain:
 
 				for(int j = 0; j < intArray[i]; j++) {
 
@@ -164,8 +172,6 @@ class Dictionary {
 
 				// Complete for loop without colliding
 				completedSecondHash = true;
-
-				label tryAgain:
 
 			}
 
