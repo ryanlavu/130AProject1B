@@ -266,7 +266,7 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 		
 		if(hashTable[hashValue] != nullptr) {
 			
-			int hash2Value = hashArray[hashValue]->hash(word) % hashTable[hashValue]->size();
+			int hash2Value = hashArray[hashValue]->hash(word) % hashTable[hashValue]->size() - 1;
 
 			if(hashTable[hashValue][hash2Value] == word) {
 
