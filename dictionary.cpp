@@ -215,7 +215,7 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 		vector<string> maxColList;
 
 		// For loop to print all words in the slot with most collisions
-		for(int i = 0; i < maxCol; i++) {
+		for(int i = 0; i < (intArray[maxColIndex] * intArray[maxColIndex]); i++) {
 
 			if(hashTable[maxColIndex][i] != "")
 			maxColList.push_back(hashTable[maxColIndex][i]);	
