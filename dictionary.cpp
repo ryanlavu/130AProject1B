@@ -81,6 +81,14 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 
 		}
 
+		/*for(int i = 0; i < wordVector.size(); i++)
+		{
+			for(int j = 0; j < wordVector[i].size(); j++)
+			{
+				cout << "Word vector print out wordVector[i][j], i = " << i << " j = " << j << " -> " << wordVector[i][j] << endl;
+			}
+		}*/
+
 		// Set the max of uniqueWords to totalWords
 		uniqueWords = totalWords;
 
@@ -122,7 +130,7 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 				//Hash24 replaceHash;
 				hashTable[i] = new string[intArray[i] * intArray[i]];
 				//hashArray[i] = replaceHash;
-				hashArray[i] = new Hash24();
+				hashArray[i] = new Hash24(rand_a, rand_b, rand_c);
 				//hashArray[i] = new Hash24(rand_a,rand_b,rand_c); shouldn't it be this?
 				hashAttemptArray[i]++;
 
@@ -138,9 +146,7 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 			while(!completedSecondHash) {
 
 				tryAgain:
-
 				for(int j = 0; j < intArray[i]; j++) {
-
 					int tempIndex = hashArray[i]->hash(wordVector[i][j]) % wordVector[i].size();
 
 					// If there is a collision within the secondary table
@@ -161,7 +167,6 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 						goto tryAgain;
 
 					} else {
-
 						hashTable[i][tempIndex] = wordVector[i][j];
 
 					}
@@ -266,25 +271,25 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 
 	}
 
-	bool Dictionary::find(string word) {
+	bool Dictionary::find(string wordi) {
 
-		int hashValue = mainHash->hash(word) % tableSize;
+		int hashValue = mainHash->hash(wordi) % tableSize;
 		Hash24 * secondArrayHash = hashArray[hashValue];
 		
-		if(hashTable[hashValue] ) {
+		if(hashTable[hashValue] != nullptr) {
 			
-			int hash2Value = hashArray[hashValue]->hash(word) % hashTable[hashValue]->size();
+			int hash2Value = hashArray[hashValue]->hash(wordi) % hashTable[hashValue]->size();
 
-			if(hashTable[hashValue][hash2Value] == word) {
+			if(hashTable[hashValue][hash2Value] == wordi) {
 
-				cout << word << " found at " << hashValue << endl;
+				cout << wordi << " found at " << hashValue << endl;
 				return true;
 
 			}
 		}
 
 		//Print not found if not found
-		cout << word << " not found" << endl;
+		cout << wordi << " not found" << endl;
 
 		return false;
 
