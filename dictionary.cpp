@@ -254,24 +254,24 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 
 	}
 
-	bool Dictionary::find(string wordi) {
+	bool Dictionary::find(string word) {
 		
 		int hashValue = mainHash->hash(word) % tableSize;
 		
 		if(hashTable[hashValue] != nullptr) {
 			
-			int hash2Value = hashArray[hashValue]->hash(wordi) % hashTable[hashValue]->size();
+			int hash2Value = hashArray[hashValue]->hash(word) % hashTable[hashValue]->size();
 
-			if(hashTable[hashValue][hash2Value] == wordi) {
+			if(hashTable[hashValue][hash2Value] == word) {
 
-				cout << wordi << " found at " << hashValue << endl;
+				cout << word << " found at " << hashValue << endl;
 				return true;
 
 			}
 		}
 
 		//Print not found if not found
-		cout << wordi << " not found" << endl;
+		cout << word << " not found" << endl;
 
 		return false;
 
