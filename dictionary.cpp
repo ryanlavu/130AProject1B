@@ -70,10 +70,10 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 		}
 
 		// This is to read in the wordbase file and hash the words into a intArray and wordVector
-		while(wordBase) {
+		while(getline(wordBase,word)) {
 
-			getline(wordBase, word);
-			if(word.empty()) break;
+			//getline(wordBase, word);
+			//if(word.empty()) break;
 			totalWords++;
 			index = (mainHash->hash(word) % tableSize);
 			wordVector[index].push_back(word);
