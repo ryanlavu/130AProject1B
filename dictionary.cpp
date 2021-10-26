@@ -1,6 +1,7 @@
 #ifndef DICT_CPP
 #define DICT_CPP
 
+#include <algorithm>
 #include "dictionary.h"
 
 using namespace std;
@@ -209,13 +210,18 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 
 		cout << "** Words in the slot with most collisions ***" << endl;
 
-		// For loop to print all words in the slot with most collisions
+		vector<string> maxColList;
 
+		// For loop to print all words in the slot with most collisions
 		for(int i = 0; i < maxCol; i++) {
 
-			cout << hashTable[maxColIndex][i] << endl;	
+			maxColList.push_back(hashTable[maxColIndex][i]);	
 
 		}
+
+		sort(maxColList.begin(), maxColList.end());
+
+		for(int i = 0; i < maxColList.size(); i++) cout << maxColList[i] << endl;
 
 		// For loop for # of secondary hash tables trying hash functions
 		cout << "Number of hash functions tried:" << endl;
