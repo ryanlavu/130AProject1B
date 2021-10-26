@@ -225,7 +225,7 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 
 		for(int i = 0; i < maxCol; i++) {
 
-			//cout << hashTable[maxColIndex][i] << endl;	
+			cout << hashTable[maxColIndex][i] << endl;	
 
 		}
 
