@@ -217,7 +217,7 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 		// For loop to print all words in the slot with most collisions
 		for(int i = 0; i < (intArray[maxColIndex] * intArray[maxColIndex]); i++) {
 
-			if(hashTable[maxColIndex][i] != "")
+			if(hashTable[maxColIndex][i] != "" && maxCol > 0)
 			maxColList.push_back(hashTable[maxColIndex][i]);	
 
 		}
