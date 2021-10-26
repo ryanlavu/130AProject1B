@@ -16,11 +16,11 @@ int main(int argc, char *argv[]) {
 
 		ifstream queryFile(argv[3]);
 		cout << "Queries:" << endl;
-		while(queryFile)
+		while(getline(queryFile, query))
 		{
-			getline(queryFile, query);
-			if(query.empty())
-				break;
+			//getline(queryFile, query);
+			//if(query.empty())
+			//	break;
 			dictionaryObject->find(query);
 		}
 
