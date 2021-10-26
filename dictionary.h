@@ -16,6 +16,7 @@ class Dictionary {
 		Hash24 * mainHash;
 		Hash24 ** hashArray;
 		int tableSize;
+		int * intArray;
 
 		Dictionary(string fname, string paramFileName);
 		bool find(string word);

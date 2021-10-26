@@ -48,7 +48,7 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 		// Variables for loading words from file and necessary data
 		ifstream wordBase(fname);
 		vector<vector<string>> wordVector;
-		int intArray[tableSize] = {0};
+		intArray = new int[tableSize];
 		int totalWords = 0;
 		int uniqueWords = 0;
 		int index = 0;
@@ -113,6 +113,8 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 			if(intArray[i] > 0) {
 				//Hash24 replaceHash;
 				hashTable[i] = new string[intArray[i] * intArray[i]];
+				//cout << "Int Array Squared: " << intArray[i] * intArray[i] << endl;
+				//cout << "Hash Bucket Size: " << hashTable[i]->size() << endl;
 				//hashArray[i] = replaceHash;
 				hashArray[i] = new Hash24(rand_a, rand_b, rand_c);
 				//hashArray[i] = new Hash24(rand_a,rand_b,rand_c); shouldn't it be this?
@@ -131,7 +133,7 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 
 				tryAgain:
 				for(int j = 0; j < intArray[i]; j++) {
-					int tempIndex = hashArray[i]->hash(wordVector[i][j]) % wordVector[i].size();
+					int tempIndex = hashArray[i]->hash(wordVector[i][j]) % (intArray[i] * intArray[i]);
 
 					// If there is a collision within the secondary table
 					if(hashTable[i][tempIndex] != "") {
@@ -266,7 +268,8 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 		
 		if(hashTable[hashValue] != nullptr) {
 			
-			int hash2Value = hashArray[hashValue]->hash(word) % hashTable[hashValue]->size() - 1;
+			//int hash2Value = hashArray[hashValue]->hash(word) % hashTable[hashValue]->size() - 1;
+			int hash2Value = hashArray[hashValue]->hash(word) % (intArray[hashValue] * intArray[hashValue]);
 			if(hash2Value < 0) hash2Value = 0;
 
 
