@@ -273,8 +273,12 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 
 	bool Dictionary::find(string wordi) {
 
+<<<<<<< HEAD
 		int hashValue = mainHash->hash(wordi) % tableSize;
 		Hash24 * secondArrayHash = hashArray[hashValue];
+=======
+		int hashValue = mainHash->hash(word) % tableSize;
+>>>>>>> 2222132f942690dc4f698d3caab56b479c35b0ef
 		
 		if(hashTable[hashValue] != nullptr) {
 			
