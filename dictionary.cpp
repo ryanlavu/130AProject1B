@@ -5,15 +5,6 @@
 
 using namespace std;
 
-/*
-string ** hashTable;
-Hash24 * mainHash;
-Hash24 ** hashArray;
-
-class Dictionary {
-
-	public:*/
-
 Dictionary::Dictionary(string fname, string paramFileName) {
 
 		// General variables for main hash table
@@ -80,14 +71,6 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 			intArray[index]++;
 
 		}
-
-		/*for(int i = 0; i < wordVector.size(); i++)
-		{
-			for(int j = 0; j < wordVector[i].size(); j++)
-			{
-				cout << "Word vector print out wordVector[i][j], i = " << i << " j = " << j << " -> " << wordVector[i][j] << endl;
-			}
-		}*/
 
 		// Set the max of uniqueWords to totalWords
 		uniqueWords = totalWords;
@@ -272,13 +255,8 @@ Dictionary::Dictionary(string fname, string paramFileName) {
 	}
 
 	bool Dictionary::find(string wordi) {
-
-<<<<<<< HEAD
-		int hashValue = mainHash->hash(wordi) % tableSize;
-		Hash24 * secondArrayHash = hashArray[hashValue];
-=======
+		
 		int hashValue = mainHash->hash(word) % tableSize;
->>>>>>> 2222132f942690dc4f698d3caab56b479c35b0ef
 		
 		if(hashTable[hashValue] != nullptr) {
 			
